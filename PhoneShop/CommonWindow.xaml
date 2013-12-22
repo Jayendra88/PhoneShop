@@ -24,7 +24,9 @@
 
                     <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                         <Border BorderBrush="LightGray" BorderThickness="1" Margin="2">
-
+                            <ListView>
+                                
+                            </ListView>
                         </Border>
                     </ScrollViewer>
                 </Grid>

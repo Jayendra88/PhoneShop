@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -19,9 +20,14 @@ namespace PhoneShop
     /// </summary>
     public partial class AddNewJobUserControl : UserControl
     {
+        ObservableCollection<string> nics = null;
+
         public AddNewJobUserControl()
         {
             InitializeComponent();
+            nics = new ObservableCollection<string> { "883481011V", "893481011V", "883581011V" };
+            nicNoCBox.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = nics });
+
         }
 
         private void CancelJobBtnClicked(object sender, RoutedEventArgs e)
@@ -55,5 +61,19 @@ namespace PhoneShop
 
 
         }
+
+        
+
+        private void NICComboboxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void NICComboboxLostForcuse(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

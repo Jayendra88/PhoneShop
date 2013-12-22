@@ -34,7 +34,12 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="NIC Number" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <ComboBox Name="nicNoCBox" Grid.Row="0" Margin="2" Grid.Column="1" Text="Select Customer"/>
+                            <ComboBox Name="nicNoCBox" Grid.Row="0"
+                                      Margin="2" Grid.Column="1" 
+                                      IsEditable="True"
+                                      SelectionChanged="NICComboboxSelectionChanged"
+                                      LostFocus="NICComboboxLostForcuse"
+                                      />
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Name" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <TextBox Name="customrNameTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" Controls:TextboxHelper.ClearTextButton="True" />
@@ -63,7 +68,10 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Model" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <ComboBox Name="phoneModelNoCBox" Grid.Row="0" Margin="2" Grid.Column="1" Text="Select Customer"/>
+                            <ComboBox Name="phoneModelNoCBox" Grid.Row="0"
+                                      Margin="2" Grid.Column="1" 
+                                      IsEditable="True"
+                                      />
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Brand Name" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <TextBox Name="brandNameTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" Controls:TextboxHelper.ClearTextButton="True" />
