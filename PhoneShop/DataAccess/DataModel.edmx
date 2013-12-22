@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PhoneShopdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="PhoneShopdbModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="PhoneShopdbModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Device" EntityType="PhoneShopdbModel.Store.Device" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Job" EntityType="PhoneShopdbModel.Store.Job" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NewItem" EntityType="PhoneShopdbModel.Store.NewItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhoneModel" EntityType="PhoneShopdbModel.Store.PhoneModel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Repare" EntityType="PhoneShopdbModel.Store.Repare" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="PhoneShopdbModel.Store.User" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="ntext" />
+          <Property Name="NIC" Type="nchar" MaxLength="10" />
+          <Property Name="Email" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Id" Type="int" />
+          <Property Name="IsPhone" Type="bit" />
+          <Property Name="EmiNumber" Type="ntext" />
+          <Property Name="Discription" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="JobNo" Type="ntext" />
+          <Property Name="JobDiscription" Type="ntext" />
+          <Property Name="OtherDiscription" Type="ntext" />
+          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="IsDevice" Type="bit" />
+        </EntityType>
+        <EntityType Name="NewItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Id" Type="int" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Discription" Type="ntext" />
+          <Property Name="Cost" Type="money" />
+        </EntityType>
+        <EntityType Name="PhoneModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="ntext" />
+          <Property Name="ModelNo" Type="ntext" />
+          <Property Name="ImageURI" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Repare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Developer_Id" Type="int" />
+          <Property Name="Job_Id" Type="int" />
+          <Property Name="Discription" Type="ntext" />
+          <Property Name="Cost" Type="money" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="ntext" />
+          <Property Name="Status" Type="ntext" />
+          <Property Name="UserName" Type="nchar" MaxLength="100" />
+          <Property Name="Password" Type="nchar" MaxLength="100" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PhoneShopdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PhoneShopdbEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Customers" EntityType="PhoneShopdbModel.Customer" />
+          <EntitySet Name="Devices" EntityType="PhoneShopdbModel.Device" />
+          <EntitySet Name="Jobs" EntityType="PhoneShopdbModel.Job" />
+          <EntitySet Name="NewItems" EntityType="PhoneShopdbModel.NewItem" />
+          <EntitySet Name="PhoneModels" EntityType="PhoneShopdbModel.PhoneModel" />
+          <EntitySet Name="Repares" EntityType="PhoneShopdbModel.Repare" />
+          <EntitySet Name="Users" EntityType="PhoneShopdbModel.User" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NIC" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Job_Id" />
+          <Property Type="Boolean" Name="IsPhone" />
+          <Property Type="String" Name="EmiNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="JobNo" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="JobDiscription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OtherDiscription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCompleted" />
+          <Property Type="Boolean" Name="IsDevice" />
+        </EntityType>
+        <EntityType Name="NewItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Job_Id" />
+          <Property Type="String" Name="Name" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="PhoneModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BrandName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ModelNo" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageURI" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Repare">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Developer_Id" />
+          <Property Type="Int32" Name="Job_Id" />
+          <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Status" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserName" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PhoneShopdbModelStoreContainer" CdmEntityContainer="PhoneShopdbEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NIC" ColumnName="NIC" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.Device">
+              <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="EmiNumber" ColumnName="EmiNumber" />
+                <ScalarProperty Name="IsPhone" ColumnName="IsPhone" />
+                <ScalarProperty Name="Job_Id" ColumnName="Job_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="OtherDiscription" ColumnName="OtherDiscription" />
+                <ScalarProperty Name="JobDiscription" ColumnName="JobDiscription" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewItems">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.NewItem">
+              <MappingFragment StoreEntitySet="NewItem">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Job_Id" ColumnName="Job_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneModels">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.PhoneModel">
+              <MappingFragment StoreEntitySet="PhoneModel">
+                <ScalarProperty Name="ImageURI" ColumnName="ImageURI" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repares">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.Repare">
+              <MappingFragment StoreEntitySet="Repare">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Job_Id" ColumnName="Job_Id" />
+                <ScalarProperty Name="Developer_Id" ColumnName="Developer_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

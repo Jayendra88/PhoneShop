@@ -1,0 +1,179 @@
+﻿<Controls:MetroWindow x:Class="PhoneShop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:views="clr-namespace:PhoneShop"
+        Title="Phone Shop" MinHeight="650" MinWidth="1000" Icon="/Content/Images/icon-logo.png"
+        WindowStartupLocation="CenterScreen" >
+    
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+    </Window.Resources>
+    <!--<Window.Background>
+        <ImageBrush Stretch="Uniform" ImageSource="{Binding Source=Content\\Images\\background.jpg}" AlignmentY="Top" Opacity="0.05"/>
+    </Window.Background>-->
+    
+    <i:Interaction.Behaviors>
+        <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" />
+        <behaviours:BorderlessWindowBehavior ResizeWithGrip="True" EnableDWMDropShadow="True" AllowsTransparency="False"/>
+    </i:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Background="LightBlue">
+            <Menu Grid.Row="0" Background="LightBlue" Margin="5,0,0,0" Height="30">
+                <MenuItem Header="_File" Height="30">
+                    <MenuItem Header="_Add New">
+                        <MenuItem Header="Admin" />
+                        <MenuItem Header="Phone" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Edit" >
+                        <MenuItem.Icon>
+                            <Image Width="15" Height="15" Source="/Content/Images/edit.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Phone" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Import">
+                        <MenuItem.Icon>
+                            <Image Width="15" Height="15" Source="/Content/Images/import.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Microsoft XL"/>
+                    </MenuItem>
+                    <MenuItem Header="_Export">
+                        <MenuItem.Icon>
+                            <Image Width="15" Height="15" Source="/Content/Images/export.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Microsoft XL"/>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="_Exit">
+                        <MenuItem.Icon>
+                            <Image Source="/Content/Images/exit.png" Height="15" Width="15"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Window" Height="30">
+                    <MenuItem Name="commonSearchMI" Header="Common Search" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <!--<MenuItem Name="jobDetailsMI" Header="Job Details" IsCheckable="True" IsChecked="True"></MenuItem>-->
+                    <Separator />
+                    <MenuItem Name="addNewJobMI" Header="Add New Job" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <MenuItem Name="releaseJobMI" Header="Release Job" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <!--<Separator />
+                    <MenuItem Name="jobsDonePanelMI" Header="Jobs Done" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <MenuItem Name="jobsNotDonelMI" Header="Jobs Not Done" IsCheckable="True" IsChecked="True"></MenuItem>-->
+                    <Separator/>
+                    <MenuItem Name="repareDetailsPanelMI" Header="Developer View" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <MenuItem Name="commonDetailsMI" Header="Jobs Gallery" IsCheckable="True" IsChecked="True"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <DockPanel Grid.Row="1" Name="dcPanel">
+            <Border BorderThickness="1" BorderBrush="LightBlue" DockPanel.Dock="Left">
+                <Grid Width="200" Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                      ElementName=commonSearchMI, Mode=TwoWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Search" FontSize="25" />
+                    </Grid>
+                    <TextBox Grid.Row="1" Margin="2,0,2,0" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Search Anything" Controls:TextboxHelper.ClearTextButton="True"/>
+
+                    <Grid Grid.Row="2">
+                        <ScrollViewer Name="commonSearchScrollViewer">
+
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+            <!--<Border BorderThickness="1" BorderBrush="LightBlue" DockPanel.Dock="Right">
+                <Grid Width="200" 
+                  Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                  ElementName=jobDetailsMI, Mode=TwoWay}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Job Details" FontSize="25" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid DockPanel.Dock="Top" Grid.Row="0"
+                          Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                          ElementName=jobsDonePanelMI, Mode=TwoWay}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Margin="3,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Jobs Completed" FontSize="20" />
+                                <Separator Grid.Row="1"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1"
+                          Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                          ElementName=jobsNotDonelMI, Mode=TwoWay}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Margin="3,0,2,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Jobs Not Completed" FontSize="20" />
+                            <Separator Grid.Row="1"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>-->
+            <Grid >
+                <TabControl>
+                    <TabItem Header="Add New Job"  
+                             Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                             ElementName=addNewJobMI, Mode=TwoWay}">
+                        <views:AddNewJobUserControl></views:AddNewJobUserControl>
+                    </TabItem>
+                    
+                    <TabItem Header="Release Job"
+                             Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                             ElementName=releaseJobMI, Mode=TwoWay}">
+                        <views:ReleaseJobUserControl></views:ReleaseJobUserControl>
+                    </TabItem>
+
+                    <TabItem Header="Developer Options"
+                             Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                             ElementName=repareDetailsPanelMI, Mode=TwoWay}">
+                        <views:PhoneRepareDetailsUserControl></views:PhoneRepareDetailsUserControl>
+                    </TabItem>
+
+                    <TabItem Header="Detailed Gallery"
+                             Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
+                             ElementName=commonDetailsMI, Mode=TwoWay}">
+                        <views:CommonWindow></views:CommonWindow>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Controls:MetroWindow>
