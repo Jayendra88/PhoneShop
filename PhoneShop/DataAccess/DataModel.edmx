@@ -43,6 +43,7 @@
           <Property Name="OtherDiscription" Type="ntext" />
           <Property Name="IsCompleted" Type="bit" />
           <Property Name="IsDevice" Type="bit" />
+          <Property Name="Customer_Id" Type="int" />
         </EntityType>
         <EntityType Name="NewItem">
           <Key>
@@ -125,6 +126,7 @@
           <Property Type="String" Name="OtherDiscription" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsCompleted" />
           <Property Type="Boolean" Name="IsDevice" />
+          <Property Type="Int32" Name="Customer_Id" />
         </EntityType>
         <EntityType Name="NewItem">
           <Key>
@@ -195,6 +197,7 @@
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="PhoneShopdbModel.Job">
               <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
                 <ScalarProperty Name="OtherDiscription" ColumnName="OtherDiscription" />

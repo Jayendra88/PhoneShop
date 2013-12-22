@@ -20,5 +20,6 @@ namespace PhoneShop.DataAccess
         public string OtherDiscription { get; set; }
         public Nullable<bool> IsCompleted { get; set; }
         public Nullable<bool> IsDevice { get; set; }
+        public Nullable<int> Customer_Id { get; set; }
     }
 }
