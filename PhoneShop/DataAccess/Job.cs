@@ -14,6 +14,13 @@ namespace PhoneShop.DataAccess
     
     public partial class Job
     {
+        public Job()
+        {
+            this.Devices = new HashSet<Device>();
+            this.NewItems = new HashSet<NewItem>();
+            this.Repares = new HashSet<Repare>();
+        }
+    
         public int Id { get; set; }
         public string JobNo { get; set; }
         public string JobDiscription { get; set; }
@@ -21,5 +28,10 @@ namespace PhoneShop.DataAccess
         public Nullable<bool> IsCompleted { get; set; }
         public Nullable<bool> IsDevice { get; set; }
         public Nullable<int> Customer_Id { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<Device> Devices { get; set; }
+        public virtual ICollection<NewItem> NewItems { get; set; }
+        public virtual ICollection<Repare> Repares { get; set; }
     }
 }

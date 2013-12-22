@@ -31,6 +31,7 @@ namespace PhoneShop.DataAccess
         public DbSet<NewItem> NewItems { get; set; }
         public DbSet<PhoneModel> PhoneModels { get; set; }
         public DbSet<Repare> Repares { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet<TelephoneNumber> TelephoneNumbers { get; set; }
     }
 }

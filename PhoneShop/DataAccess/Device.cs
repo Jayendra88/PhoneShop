@@ -19,5 +19,7 @@ namespace PhoneShop.DataAccess
         public Nullable<bool> IsPhone { get; set; }
         public string EmiNumber { get; set; }
         public string Discription { get; set; }
+    
+        public virtual Job Job { get; set; }
     }
 }

@@ -12,15 +12,12 @@ namespace PhoneShop.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Repare
+    public partial class TelephoneNumber
     {
         public int Id { get; set; }
-        public Nullable<int> Developer_Id { get; set; }
-        public Nullable<int> Job_Id { get; set; }
-        public string Discription { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<int> Customer_Id { get; set; }
+        public string TelNo { get; set; }
     
-        public virtual Job Job { get; set; }
-        public virtual SystemUser SystemUser { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

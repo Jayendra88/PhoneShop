@@ -12,7 +12,32 @@
           <EntitySet Name="NewItem" EntityType="PhoneShopdbModel.Store.NewItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PhoneModel" EntityType="PhoneShopdbModel.Store.PhoneModel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Repare" EntityType="PhoneShopdbModel.Store.Repare" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="PhoneShopdbModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SystemUser" EntityType="PhoneShopdbModel.Store.SystemUser" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TelephoneNumber" EntityType="PhoneShopdbModel.Store.TelephoneNumber" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="device_fk_jobId" Association="PhoneShopdbModel.Store.device_fk_jobId">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Device" EntitySet="Device" />
+          </AssociationSet>
+          <AssociationSet Name="fk_customerId" Association="PhoneShopdbModel.Store.fk_customerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TelephoneNumber" EntitySet="TelephoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="job_fk_customerId" Association="PhoneShopdbModel.Store.job_fk_customerId">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="newItem_fk_jobId" Association="PhoneShopdbModel.Store.newItem_fk_jobId">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="NewItem" EntitySet="NewItem" />
+          </AssociationSet>
+          <AssociationSet Name="repare_fk_developerId" Association="PhoneShopdbModel.Store.repare_fk_developerId">
+            <End Role="SystemUser" EntitySet="SystemUser" />
+            <End Role="Repare" EntitySet="Repare" />
+          </AssociationSet>
+          <AssociationSet Name="repare_fk_jobId" Association="PhoneShopdbModel.Store.repare_fk_jobId">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Repare" EntitySet="Repare" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customers">
           <Key>
@@ -74,7 +99,7 @@
           <Property Name="Discription" Type="ntext" />
           <Property Name="Cost" Type="money" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="SystemUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -84,6 +109,86 @@
           <Property Name="UserName" Type="nchar" MaxLength="100" />
           <Property Name="Password" Type="nchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="TelephoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_Id" Type="int" />
+          <Property Name="TelNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="device_fk_jobId">
+          <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="0..1" />
+          <End Role="Device" Type="PhoneShopdbModel.Store.Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_customerId">
+          <End Role="Customers" Type="PhoneShopdbModel.Store.Customers" Multiplicity="0..1" />
+          <End Role="TelephoneNumber" Type="PhoneShopdbModel.Store.TelephoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TelephoneNumber">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_fk_customerId">
+          <End Role="Customers" Type="PhoneShopdbModel.Store.Customers" Multiplicity="0..1" />
+          <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="newItem_fk_jobId">
+          <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="0..1" />
+          <End Role="NewItem" Type="PhoneShopdbModel.Store.NewItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewItem">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="repare_fk_developerId">
+          <End Role="SystemUser" Type="PhoneShopdbModel.Store.SystemUser" Multiplicity="0..1" />
+          <End Role="Repare" Type="PhoneShopdbModel.Store.Repare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repare">
+              <PropertyRef Name="Developer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="repare_fk_jobId">
+          <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="0..1" />
+          <End Role="Repare" Type="PhoneShopdbModel.Store.Repare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repare">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -95,7 +200,32 @@
           <EntitySet Name="NewItems" EntityType="PhoneShopdbModel.NewItem" />
           <EntitySet Name="PhoneModels" EntityType="PhoneShopdbModel.PhoneModel" />
           <EntitySet Name="Repares" EntityType="PhoneShopdbModel.Repare" />
-          <EntitySet Name="Users" EntityType="PhoneShopdbModel.User" />
+          <EntitySet Name="SystemUsers" EntityType="PhoneShopdbModel.SystemUser" />
+          <EntitySet Name="TelephoneNumbers" EntityType="PhoneShopdbModel.TelephoneNumber" />
+          <AssociationSet Name="fk_customerId" Association="PhoneShopdbModel.fk_customerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="TelephoneNumber" EntitySet="TelephoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="job_fk_customerId" Association="PhoneShopdbModel.job_fk_customerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="device_fk_jobId" Association="PhoneShopdbModel.device_fk_jobId">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="newItem_fk_jobId" Association="PhoneShopdbModel.newItem_fk_jobId">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="NewItem" EntitySet="NewItems" />
+          </AssociationSet>
+          <AssociationSet Name="repare_fk_jobId" Association="PhoneShopdbModel.repare_fk_jobId">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Repare" EntitySet="Repares" />
+          </AssociationSet>
+          <AssociationSet Name="repare_fk_developerId" Association="PhoneShopdbModel.repare_fk_developerId">
+            <End Role="SystemUser" EntitySet="SystemUsers" />
+            <End Role="Repare" EntitySet="Repares" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -105,6 +235,8 @@
           <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NIC" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TelephoneNumbers" Relationship="PhoneShopdbModel.fk_customerId" FromRole="Customer" ToRole="TelephoneNumber" />
+          <NavigationProperty Name="Jobs" Relationship="PhoneShopdbModel.job_fk_customerId" FromRole="Customer" ToRole="Job" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -115,6 +247,7 @@
           <Property Type="Boolean" Name="IsPhone" />
           <Property Type="String" Name="EmiNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.device_fk_jobId" FromRole="Device" ToRole="Job" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -127,6 +260,10 @@
           <Property Type="Boolean" Name="IsCompleted" />
           <Property Type="Boolean" Name="IsDevice" />
           <Property Type="Int32" Name="Customer_Id" />
+          <NavigationProperty Name="Customer" Relationship="PhoneShopdbModel.job_fk_customerId" FromRole="Job" ToRole="Customer" />
+          <NavigationProperty Name="Devices" Relationship="PhoneShopdbModel.device_fk_jobId" FromRole="Job" ToRole="Device" />
+          <NavigationProperty Name="NewItems" Relationship="PhoneShopdbModel.newItem_fk_jobId" FromRole="Job" ToRole="NewItem" />
+          <NavigationProperty Name="Repares" Relationship="PhoneShopdbModel.repare_fk_jobId" FromRole="Job" ToRole="Repare" />
         </EntityType>
         <EntityType Name="NewItem">
           <Key>
@@ -137,6 +274,7 @@
           <Property Type="String" Name="Name" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.newItem_fk_jobId" FromRole="NewItem" ToRole="Job" />
         </EntityType>
         <EntityType Name="PhoneModel">
           <Key>
@@ -156,8 +294,10 @@
           <Property Type="Int32" Name="Job_Id" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.repare_fk_jobId" FromRole="Repare" ToRole="Job" />
+          <NavigationProperty Name="SystemUser" Relationship="PhoneShopdbModel.repare_fk_developerId" FromRole="Repare" ToRole="SystemUser" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="SystemUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -166,7 +306,89 @@
           <Property Type="String" Name="Status" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="UserName" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="Password" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Repares" Relationship="PhoneShopdbModel.repare_fk_developerId" FromRole="SystemUser" ToRole="Repare" />
         </EntityType>
+        <EntityType Name="TelephoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Customer_Id" />
+          <Property Type="String" Name="TelNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="PhoneShopdbModel.fk_customerId" FromRole="TelephoneNumber" ToRole="Customer" />
+        </EntityType>
+        <Association Name="fk_customerId">
+          <End Type="PhoneShopdbModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.TelephoneNumber" Role="TelephoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TelephoneNumber">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="job_fk_customerId">
+          <End Type="PhoneShopdbModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="device_fk_jobId">
+          <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="newItem_fk_jobId">
+          <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.NewItem" Role="NewItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NewItem">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="repare_fk_jobId">
+          <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.Repare" Role="Repare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repare">
+              <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="repare_fk_developerId">
+          <End Type="PhoneShopdbModel.SystemUser" Role="SystemUser" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.Repare" Role="Repare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Repare">
+              <PropertyRef Name="Developer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -239,13 +461,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="PhoneShopdbModel.User">
-              <MappingFragment StoreEntitySet="User">
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUser">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelephoneNumbers">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.TelephoneNumber">
+              <MappingFragment StoreEntitySet="TelephoneNumber">
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

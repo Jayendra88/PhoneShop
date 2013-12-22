@@ -14,9 +14,18 @@ namespace PhoneShop.DataAccess
     
     public partial class Customer
     {
+        public Customer()
+        {
+            this.TelephoneNumbers = new HashSet<TelephoneNumber>();
+            this.Jobs = new HashSet<Job>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string NIC { get; set; }
         public string Email { get; set; }
+    
+        public virtual ICollection<TelephoneNumber> TelephoneNumbers { get; set; }
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

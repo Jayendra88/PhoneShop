@@ -19,5 +19,7 @@ namespace PhoneShop.DataAccess
         public string Name { get; set; }
         public string Discription { get; set; }
         public Nullable<decimal> Cost { get; set; }
+    
+        public virtual Job Job { get; set; }
     }
 }

@@ -4,15 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6ef7827e348d48349311590d72bc2621" Name="Diagram1" ZoomLevel="67" >
-        <EntityTypeShape EntityType="PhoneShopdbModel.Customer" Width="1.5" PointX="0.407063903476607" PointY="9.443858762012729" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.Device" Width="1.5" PointX="5.5796156514341089" PointY="20.569177741449874" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.Job" Width="1.5" PointX="6.56325205534848" PointY="31.011311903135532" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.NewItem" Width="1.5" PointX="5.1606459474007815" PointY="7.3178716485006134" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.PhoneModel" Width="1.5" PointX="9.9135009450435181" PointY="23.6458719482859" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.Repare" Width="1.5" PointX="8.88978070993432" PointY="19.639945575799768" />
-        <EntityTypeShape EntityType="PhoneShopdbModel.User" Width="1.5" PointX="9.2705449896261776" PointY="17.421841376191864" />
-      </Diagram>
+      <Diagram DiagramId="6ef7827e348d48349311590d72bc2621" Name="Diagram1" ZoomLevel="108" >
+        <EntityTypeShape EntityType="PhoneShopdbModel.TelephoneNumber" Width="1.5" PointX="2.75" PointY="9.5" />
+        <AssociationConnector Association="PhoneShopdbModel.fk_customerId" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.Customer" Width="1.5" PointX="4.375" PointY="17.875" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.Device" Width="1.5" PointX="4.5" PointY="15.25" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.Job" Width="1.5" PointX="7.375" PointY="15.625" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.NewItem" Width="1.5" PointX="10" PointY="15.25" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.PhoneModel" Width="1.5" PointX="10.25" PointY="19" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.Repare" Width="1.5" PointX="7.5" PointY="19.75" />
+        <EntityTypeShape EntityType="PhoneShopdbModel.SystemUser" Width="1.5" PointX="4.375" PointY="20.375" />
+        <AssociationConnector Association="PhoneShopdbModel.fk_customerId" />
+        <AssociationConnector Association="PhoneShopdbModel.job_fk_customerId" />
+        <AssociationConnector Association="PhoneShopdbModel.device_fk_jobId" />
+        <AssociationConnector Association="PhoneShopdbModel.newItem_fk_jobId" />
+        <AssociationConnector Association="PhoneShopdbModel.repare_fk_jobId" />
+        <AssociationConnector Association="PhoneShopdbModel.repare_fk_developerId" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
