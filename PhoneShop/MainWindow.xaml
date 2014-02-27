@@ -6,11 +6,14 @@
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:views="clr-namespace:PhoneShop"
+        xmlns:VM="clr-namespace:PhoneShop.ViewModels"
         Title="Phone Shop" MinHeight="650" MinWidth="1000" Icon="/Content/Images/icon-logo.png"
         WindowStartupLocation="CenterScreen" >
     
     <Window.Resources>
+        <VM:MainDataContractorVM x:Key="MainDataModel"/>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+
     </Window.Resources>
     <!--<Window.Background>
         <ImageBrush Stretch="Uniform" ImageSource="{Binding Source=Content\\Images\\background.jpg}" AlignmentY="Top" Opacity="0.05"/>
@@ -61,9 +64,9 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Window" Height="30">
-                    <MenuItem Name="commonSearchMI" Header="Common Search" IsCheckable="True" IsChecked="True"></MenuItem>
+                    <!--<MenuItem Name="commonSearchMI" Header="Common Search" IsCheckable="True" IsChecked="True"></MenuItem>-->
                     <!--<MenuItem Name="jobDetailsMI" Header="Job Details" IsCheckable="True" IsChecked="True"></MenuItem>-->
-                    <Separator />
+                    <!--<Separator />-->
                     <MenuItem Name="addNewJobMI" Header="Add New Job" IsCheckable="True" IsChecked="True"></MenuItem>
                     <MenuItem Name="releaseJobMI" Header="Release Job" IsCheckable="True" IsChecked="True"></MenuItem>
                     <!--<Separator />
@@ -76,8 +79,8 @@
             </Menu>
         </Grid>
 
-        <DockPanel Grid.Row="1" Name="dcPanel">
-            <Border BorderThickness="1" BorderBrush="LightBlue" DockPanel.Dock="Left">
+        <!--<DockPanel Grid.Row="1" Name="dcPanel">-->
+            <!--<Border BorderThickness="1" BorderBrush="LightBlue" DockPanel.Dock="Left">
                 <Grid Width="200" Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
                       ElementName=commonSearchMI, Mode=TwoWay}">
                     <Grid.RowDefinitions>
@@ -99,7 +102,7 @@
                         </ScrollViewer>
                     </Grid>
                 </Grid>
-            </Border>
+            </Border>-->
             <!--<Border BorderThickness="1" BorderBrush="LightBlue" DockPanel.Dock="Right">
                 <Grid Width="200" 
                   Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
@@ -146,12 +149,12 @@
                     </Grid>
                 </Grid>
             </Border>-->
-            <Grid >
+        <Grid Grid.Row="1">
                 <TabControl>
                     <TabItem Header="Add New Job"  
                              Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
                              ElementName=addNewJobMI, Mode=TwoWay}">
-                        <views:AddNewJobUserControl></views:AddNewJobUserControl>
+                    <views:AddNewJobUserControl></views:AddNewJobUserControl>
                     </TabItem>
                     
                     <TabItem Header="Release Job"
@@ -173,7 +176,7 @@
                     </TabItem>
                 </TabControl>
             </Grid>
-        </DockPanel>
+        <!--</DockPanel>-->
 
     </Grid>
 </Controls:MetroWindow>

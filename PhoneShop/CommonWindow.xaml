@@ -4,48 +4,32 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              MinHeight="500" MinWidth="400">
-    
-    <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MaxWidth="400"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+
+    <DockPanel >
+        <Border BorderThickness="1" Margin="2,2,0,2" BorderBrush="LightBlue" DockPanel.Dock="Left">
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
                     </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" Margin="5" Text="Available Jobs" FontSize="20" VerticalAlignment="Center"/>
-
-                    <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <Border BorderBrush="LightGray" BorderThickness="1" Margin="2">
-                            <ListView>
-                                
-                            </ListView>
-                        </Border>
-                    </ScrollViewer>
+                    <TextBlock Grid.Row="0" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Search Job" FontSize="25" />
                 </Grid>
+                <TextBox Grid.Row="1" Margin="2,0,2,0" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Search Anything" Controls:TextboxHelper.ClearTextButton="True"/>
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <Grid Grid.Row="2">
+                    <ScrollViewer Name="commonSearchScrollViewer" VerticalScrollBarVisibility="Auto">
 
-                    <TextBlock Grid.Row="0" Margin="5" Text="Completed Jobs" FontSize="20" VerticalAlignment="Center"/>
-
-                    <ScrollViewer Grid.Row="1"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <Border BorderBrush="LightGray" BorderThickness="1" Margin="2">
-
-                        </Border>
                     </ScrollViewer>
                 </Grid>
             </Grid>
-        </ScrollViewer>
-    </Border>
+        </Border>
+        <Border BorderThickness="1" Margin="2,2,0,2" BorderBrush="LightBlue" ></Border>
+    </DockPanel>
 </UserControl>

@@ -18,7 +18,7 @@ namespace PhoneShop.DataAccess
         public Nullable<int> Job_Id { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public Nullable<double> Cost { get; set; }
     
         public virtual Job Job { get; set; }
     }

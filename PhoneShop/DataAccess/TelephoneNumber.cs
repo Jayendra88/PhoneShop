@@ -17,6 +17,7 @@ namespace PhoneShop.DataAccess
         public int Id { get; set; }
         public Nullable<int> Customer_Id { get; set; }
         public string TelNo { get; set; }
+        public Nullable<bool> IsHome { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

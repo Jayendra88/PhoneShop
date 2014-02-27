@@ -4,11 +4,75 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:VM="clr-namespace:PhoneShop.ViewModels"
+             mc:Ignorable="d" Loaded="WindowLoaded"
              MinHeight="500" MinWidth="400">
-    <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <Grid>
+    <UserControl.DataContext>
+        <VM:ReleaseJobVM x:Name="releseJobVM"/>
+    </UserControl.DataContext>
+        <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">-->
+        <DockPanel >
+            <Border BorderThickness="1" Margin="2,2,0,2" BorderBrush="LightBlue" DockPanel.Dock="Left">
+                <Grid Width="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Search Job" FontSize="25" />
+                    </Grid>
+                    <TextBox Grid.Row="1" Margin="2,0,2,0" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Search Anything" Controls:TextboxHelper.ClearTextButton="True"/>
+
+                    <Grid Grid.Row="2">
+                        <ScrollViewer Name="commonSearchScrollViewer" VerticalScrollBarVisibility="Auto">
+                        <ListView Name="releaseJobSearchListView" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="50" Margin="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Background="Blue" Width="3"/>
+                                        <Grid Grid.Column="1" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="60*"/>
+                                                <RowDefinition Height="40*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{Binding Path=Job.JobNumber}" VerticalAlignment="Center" Margin="5,0,5,0" Grid.Row="0" FontWeight="SemiBold" FontSize="14"/>
+                                            <TextBlock Text="{Binding Path=Customer.Name}" Grid.Row="1" Margin="5,0,5,0" FontWeight="ExtraLight" FontSize="11"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                            <!--<Grid Height="50" Margin="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Background="Blue" Width="3"/>
+                                <Grid Grid.Column="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="60*"/>
+                                        <RowDefinition Height="40*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="XXX -0001" VerticalAlignment="Center" Margin="5,0,5,0" Grid.Row="0" FontWeight="SemiBold" FontSize="14"/>
+                                    <TextBlock Text="Customer Name" Grid.Row="1" Margin="5,0,5,0" FontWeight="ExtraLight" FontSize="11"/>
+                                </Grid>
+                            </Grid>-->
+                        </ListView>
+                            
+                    </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+        <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
+            <Grid Name="ReleaseJobDetailGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
@@ -34,19 +98,26 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="NIC Number :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="0" Margin="2" Grid.Column="1" Text="883481011v" VerticalAlignment="Center"/>
+                            <TextBlock Name="releaseIdNumberTB" Grid.Row="0" Margin="2" Grid.Column="1" Text="883481011v" VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Name :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="1" Margin="2" Grid.Column="1" Text="L.A.J.Kumara" VerticalAlignment="Center"/>
+                            <!--<ComboBox Grid.Row="1" Margin="2" Grid.Column="1" ItemsSource="{Binding Path=Customers}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>-->
+                            <TextBlock Name="releaseNameTB" Grid.Row="1" Margin="2" Grid.Column="1" Text="L.A.J.Kumara" VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Tel (Mobile) :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="2" Grid.Column="1" Margin="2" Text="+94714597484" VerticalAlignment="Center" />
+                            <TextBlock Name="releaseMobileNoTB" Grid.Row="2" Grid.Column="1" Margin="2" Text="+94714597484" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Tel (Home) :" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="2" Text="+94112536007" VerticalAlignment="Center"/>
+                            <TextBlock Name="releaseHomeNumberTB" Grid.Row="3" Grid.Column="1" Margin="2" Text="+94112536007" VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Margin="2" Text="E-Mail :" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="4" Grid.Column="1" Margin="2" Text="jayendra.k.a@gmail.com" VerticalAlignment="Center"/>
+                            <TextBlock Name="releaseEmailTB" Grid.Row="4" Grid.Column="1" Margin="2" Text="jayendra.k.a@gmail.com" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <Border Grid.Column="1" Margin="2,2,2,2" BorderBrush="LightGray" BorderThickness="1">
@@ -62,13 +133,13 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Model :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="0" Margin="2" Grid.Column="1" Text="Nokia Lumia 1020" VerticalAlignment="Center"/>
+                            <TextBlock Name="releasePhoneModelTB" Grid.Row="0" Margin="2" Grid.Column="1" Text="Nokia Lumia 1020" VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Brand Name :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="1" Margin="2" Grid.Column="1" Text="Nokia" VerticalAlignment="Center" />
+                            <TextBlock Name="releaseBrandNameTB" Grid.Row="1" Margin="2" Grid.Column="1" Text="Nokia" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Image :" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                            <Image Grid.Row="3" Grid.Column="1" Margin="2" Source="/Content/Images/No-Image.jpg" HorizontalAlignment="Left"/>
+                            <Image Name="releaseImageTB" Grid.Row="3" Grid.Column="1" Margin="2" Source="/Content/Images/No-Image.jpg" HorizontalAlignment="Left"/>
                         </Grid>
                     </Border>
                 </Grid>
@@ -94,29 +165,29 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Job No :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="0" Margin="2" Grid.Column="1" Text="XXX-01" VerticalAlignment="Center" />
-                        
+                            <TextBlock Name="releaseJobNumberTB" Grid.Row="0" Margin="2" Grid.Column="1" Text="XXX-01" VerticalAlignment="Center" />
+
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Emi Number :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="1" Margin="2" Grid.Column="1" Text="Emi Number" VerticalAlignment="Center" />
+                            <TextBlock Name="releaseEmiNumberTB" Grid.Row="1" Margin="2" Grid.Column="1" Text="Emi Number" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Fault Details :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="2" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <TextBlock TextWrapping="Wrap" Text="scretch in display"/>
+                                <TextBlock Name="releaseFaultDetailsTB" TextWrapping="Wrap" Text="scretch in display"/>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Other Details :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="3" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <TextBlock TextWrapping="Wrap" Text="coustomer gave us new display"/>
+                                <TextBlock Name="releaseOtherDetails" TextWrapping="Wrap" Text="coustomer gave us new display"/>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Margin="2" Text="Developer Note :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="4" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <TextBlock TextWrapping="Wrap" Text="Display replaced"/>
+                                <TextBlock Name="releaseDeveloperNote" TextWrapping="Wrap" Text="Display replaced"/>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Margin="2" Text="Accessories Taken :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="5" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <TextBlock TextWrapping="Wrap" Text="Phone, Memory Chip, Battary, SIM, Charger, New Part" />
+                                <TextBlock Name="releaseAccesoriesTB" TextWrapping="Wrap" Text="Phone, Memory Chip, Battary, SIM, Charger, New Part" />
                             </ScrollViewer>
                         </Grid>
                     </Border>
@@ -137,11 +208,11 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Advance Payment :" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="2" Text="Rs. 0.00" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Name="releaseAdvanceTB" Grid.Row="0" Grid.Column="1" Margin="2" Text="Rs. 0.00" VerticalAlignment="Center"></TextBlock>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Cost for Parts :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                <Grid Margin="2">
+                                <Grid Margin="2" Name="releaseCostOfPartsGrid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition MaxWidth="150"/>
                                         <ColumnDefinition />
@@ -152,32 +223,32 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Display :" Margin="2" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Rs. 2000.00" VerticalAlignment="Center"/>
-                                
+
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Touch Panel :" Margin="2" VerticalAlignment="Center"/>
                                     <TextBlock Grid.Row="1" Grid.Column="1" Text="Rs. 2000.00" VerticalAlignment="Center"/>
                                 </Grid>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Developers Charge :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="2" Margin="2" Grid.Column="1" TextWrapping="Wrap" Text="Rs. 1000.00" VerticalAlignment="Center"/>
+                            <TextBlock Name="releaseDeveloperChargeTB" Grid.Row="2" Margin="2" Grid.Column="1" TextWrapping="Wrap" Text="Rs. 1000.00" VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Total :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="3" Grid.Column="1" Margin="2" Text="Rs. 5000.00" VerticalAlignment="Center"/>
-                        
+                            <TextBlock Name="releaseTotalTB" Grid.Row="3" Grid.Column="1" Margin="2" Text="Rs. 5000.00" VerticalAlignment="Center"/>
+
                             <TextBlock Grid.Row="4" Grid.Column="0" Margin="2" Text="Discount :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Grid.Row="4" Grid.Column="1" Margin="2" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Rs. 0.00" Controls:TextboxHelper.ClearTextButton="True"/>
+                            <TextBox Name="releaseDiscountTB" Grid.Row="4" Grid.Column="1" Margin="2" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Rs. 0.00" Controls:TextboxHelper.ClearTextButton="True"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Margin="2" Text="New Total :"  HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="5" Grid.Column="1" Margin="2" Text="Rs. 5000.00" VerticalAlignment="Center"/>
+                            <TextBlock Name="releaseNewTotalTB" Grid.Row="5" Grid.Column="1" Margin="2" Text="Rs. 5000.00" VerticalAlignment="Center"/>
 
-                        
+
 
                         </Grid>
                     </Border>
 
                 </Grid>
 
-                <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="2">
+                <Border Margin="2,0,2,2" BorderBrush="LightGray" BorderThickness="1" Grid.Row="2">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -192,6 +263,8 @@
                 </Border>
 
             </Grid>
-        </ScrollViewer>
-    </Border>
+        </Border>
+    </DockPanel>
+        <!--</ScrollViewer>-->
+    
 </UserControl>

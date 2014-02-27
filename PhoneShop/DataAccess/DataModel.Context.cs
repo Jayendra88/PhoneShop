@@ -29,6 +29,7 @@ namespace PhoneShop.DataAccess
         public DbSet<Device> Devices { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<NewItem> NewItems { get; set; }
+        public DbSet<PhoneBrand> PhoneBrands { get; set; }
         public DbSet<PhoneModel> PhoneModels { get; set; }
         public DbSet<Repare> Repares { get; set; }
         public DbSet<SystemUser> SystemUsers { get; set; }

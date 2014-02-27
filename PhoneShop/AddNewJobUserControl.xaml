@@ -4,8 +4,14 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:VM="clr-namespace:PhoneShop.ViewModels"
              mc:Ignorable="d" 
              MinHeight="500" MinWidth="400">
+
+    <UserControl.DataContext>
+        <VM:AddNewJobVM/>
+    </UserControl.DataContext>
+
     <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <Grid>
@@ -37,9 +43,15 @@
                             <ComboBox Name="nicNoCBox" Grid.Row="0"
                                       Margin="2" Grid.Column="1" 
                                       IsEditable="True"
-                                      SelectionChanged="NICComboboxSelectionChanged"
-                                      LostFocus="NICComboboxLostForcuse"
-                                      />
+                                      KeyUp="NicComboboxKeyUp"
+                                      ItemsSource="{Binding Path=CustomerNICList}"
+                                      LostFocus="NICComboboxLostForcuse">
+                                <!--<ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>-->
+                            </ComboBox>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Name" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <TextBox Name="customrNameTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" Controls:TextboxHelper.ClearTextButton="True" />
@@ -67,14 +79,16 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Model" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <ComboBox Name="phoneModelNoCBox" Grid.Row="0"
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Brand Name" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <ComboBox Name="phoneBrandNamesCB" Grid.Row="0"
                                       Margin="2" Grid.Column="1" 
                                       IsEditable="True"
-                                      />
+                                      KeyUp="PhoneBrandCBKeyUp"
+                                      ItemsSource="{Binding Path=PhoneBrands}"
+                                      LostFocus="BrandNamesComboboxLostForcus"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Brand Name" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Name="brandNameTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" Controls:TextboxHelper.ClearTextButton="True" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Model" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <ComboBox Name="phoneModelsCB" KeyUp="PhoneModelsCBKeyUp" Grid.Row="1" Margin="2" Grid.Column="1" IsEditable="True" LostFocus="PhoneModelComboboxLostForcus"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Image" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <Image Name="phoneImgBox" Grid.Row="3" Grid.Column="1" Margin="2" Source="/Content/Images/No-Image.jpg" HorizontalAlignment="Left"/>
@@ -107,7 +121,7 @@
                             <TextBox Name="emiNoTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" Controls:TextboxHelper.ClearTextButton="True" />
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Job Note" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                            <TextBox Name="jobNoteTxtBox" Grid.Row="2" Margin="2" Grid.Column="1" TextWrapping="Wrap"/>
+                            <RichTextBox Name="jobNoteTxtBox" Grid.Row="2" Margin="2" Grid.Column="1"/>
                         </Grid>
                     </Border>
             
@@ -135,16 +149,16 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox Name="isPhoneChkBox" Grid.Row="0" Grid.Column="0" Margin="10,2,2,2" Content="Phone" />
+                                <CheckBox Name="isPhoneChkBox" Checked="PhoneCBChecked" Unchecked="PhoneCBUnchecked" Grid.Row="0" Grid.Column="0" Margin="10,2,2,2" Content="Phone" />
                                 <CheckBox Name="isBatteryChkBox" Grid.Row="1" Grid.Column="0" Margin="10,2,2,2" Content="Battary"/>
                                 <CheckBox Name="isMemoryChkBox" Grid.Row="0" Grid.Column="1" Margin="10,2,2,2" Content="Memory Chip"/>
                                 <CheckBox Name="isSimChkBox" Grid.Row="1" Grid.Column="1" Margin="10,2,2,2" Content="SIM"/>
-                                <CheckBox Name="isCharterChkBox" Grid.Row="2" Grid.Column="0" Margin="10,2,2,2" Content="Charger"/>
+                                <CheckBox Name="isBackCoverChkBox" Grid.Row="2" Grid.Column="0" Margin="10,2,2,2" Content="Back Cover"/>
                                 <TextBox Name="otherAccessoryTxtBox" Grid.Row="2" Grid.Column="1" Margin="10,2,2,2" TextWrapping="Wrap" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Other" Controls:TextboxHelper.ClearTextButton="True"/>
                             </Grid>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Other Details" HorizontalAlignment="Right" VerticalAlignment="Top" />
-                            <TextBox Name="otherJobDetailTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" TextWrapping="Wrap"/>
+                            <RichTextBox Name="otherJobDetailTxtBox" Grid.Row="1" Margin="2" Grid.Column="1" />
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Advance Payment" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <TextBox Name="advancePaymentTxtBox" Grid.Row="2" Margin="2" Grid.Column="1" TextWrapping="Wrap" Controls:TextboxHelper.Watermark="00.00" Controls:TextboxHelper.ClearTextButton="True" VerticalAlignment="Center"/>
@@ -154,7 +168,7 @@
 
                 </Grid>
 
-                <Border BorderBrush="LightGray" BorderThickness="1" Grid.Row="2">
+                <Border Margin="2,0,2,2" BorderBrush="LightGray" BorderThickness="1" Grid.Row="2">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

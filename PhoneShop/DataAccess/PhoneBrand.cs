@@ -12,19 +12,16 @@ namespace PhoneShop.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class PhoneModel
+    public partial class PhoneBrand
     {
-        public PhoneModel()
+        public PhoneBrand()
         {
-            this.Jobs = new HashSet<Job>();
+            this.PhoneModels = new HashSet<PhoneModel>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> Brand_Id { get; set; }
-        public string ModelNumber { get; set; }
-        public string ImageURI { get; set; }
+        public string BrandName { get; set; }
     
-        public virtual ICollection<Job> Jobs { get; set; }
-        public virtual PhoneBrand PhoneBrand { get; set; }
+        public virtual ICollection<PhoneModel> PhoneModels { get; set; }
     }
 }

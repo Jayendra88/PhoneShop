@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhoneShop.DataAccess;
 using PhoneShop.Models;
+using System.Collections.ObjectModel;
 
 namespace PhoneShopTest
 {
@@ -13,9 +14,9 @@ namespace PhoneShopTest
         {
             CRUDManager crudm = new CRUDManager();
 
-            CustomerVM c = new CustomerVM();
+            CustomerM c = new CustomerM();
             c.Name = "Jayendrak";
-            c.NIC = "883481011v";
+            c.NIC = "883481018v";
             c.Email = "jayendra.k.a@gmail.com";
 
             crudm.AddNewCustomer(c);
@@ -25,8 +26,29 @@ namespace PhoneShopTest
         public void GetCustomerByIDTest() 
         {
             CRUDManager crudm = new CRUDManager();
-            CustomerVM c = crudm.GetCustomerByID("883481011v");
+            //CustomerM c = crudm.GetCustomerByNIC("883481018v");
         }
 
+        [TestMethod]
+        public void GetAllCustomersTest() 
+        {
+            CRUDManager crudm = new CRUDManager();
+            ObservableCollection<CustomerM> cl = crudm.GetAllCustomers();
+        }
+        [TestMethod]
+        public void DetailedJobModelTest() 
+        {
+
+            DetailedJobModelM job = new DetailedJobModelM();
+            CustomerM c = new CustomerM();
+            c.Name = "Jayendrak";
+            c.NIC = "883481918v";
+            c.Email = "jayendra.k.a@gmail.com";
+            job.Customer = c;
+
+            CRUDManager crudm = new CRUDManager();
+
+            bool b = crudm.AddNewJobDetailed(job);
+        }
     }
 }

@@ -28,9 +28,11 @@ namespace PhoneShop.DataAccess
         public Nullable<bool> IsCompleted { get; set; }
         public Nullable<bool> IsDevice { get; set; }
         public Nullable<int> Customer_Id { get; set; }
+        public Nullable<int> PhoneModel_Id { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<Device> Devices { get; set; }
+        public virtual PhoneModel PhoneModel { get; set; }
         public virtual ICollection<NewItem> NewItems { get; set; }
         public virtual ICollection<Repare> Repares { get; set; }
     }

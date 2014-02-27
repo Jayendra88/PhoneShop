@@ -6,30 +6,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              MinHeight="500" MinWidth="400">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
-
-            <Grid>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MaxWidth="400"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+    <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">-->
+    <DockPanel>
+        <Border BorderThickness="1" Margin="2,2,0,2" BorderBrush="LightBlue" DockPanel.Dock="Left">
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="45"/>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="Available Jobs" FontSize="25" />
+                </Grid>
+                <TextBox Grid.Row="1" Margin="2,0,2,0" VerticalAlignment="Center" Controls:TextboxHelper.Watermark="Search Anything" Controls:TextboxHelper.ClearTextButton="True"/>
 
-                    <TextBlock Grid.Row="0" Margin="5" Text="Available Jobs" FontSize="20" VerticalAlignment="Center"/>
+                <Grid Grid.Row="2">
+                    <ScrollViewer Name="commonSearchScrollViewer" VerticalScrollBarVisibility="Auto">
 
-                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <Border BorderBrush="LightGray" BorderThickness="1" Margin="2">
-
-                        </Border>
                     </ScrollViewer>
                 </Grid>
-                <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" Margin="2">
+            </Grid>
+        </Border>
+        <Border BorderBrush="LightBlue" BorderThickness="1" Margin="2">
+            <Grid Name="PhoneRepareDetailsDetailGrid">
+                <!--<Border BorderBrush="LightGray" BorderThickness="1" Margin="2">-->
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -53,33 +56,33 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="0" Margin="2" Text="Job No :" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="2" Text="XXX-01" VerticalAlignment="Center" />
+                            <TextBlock Name="ajJobNoTB" Grid.Row="0" Grid.Column="1" Margin="2" Text="XXX-01" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Margin="2" Text="Customer Name :" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="2" Text="L.A.J. Kumara" VerticalAlignment="Center" />
+                            <TextBlock Name="ajCustomerNameTB" Grid.Row="1" Grid.Column="1" Margin="2" Text="L.A.J. Kumara" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Margin="2" Text="Emi Number :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBlock Grid.Row="2" Margin="2" Grid.Column="1" Text="Emi Number" VerticalAlignment="Center" />
+                            <TextBlock Name="ajEmiNumberTB" Grid.Row="2" Margin="2" Grid.Column="1" Text="Emi Number" VerticalAlignment="Center" />
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Margin="2" Text="Fault Details :" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <ScrollViewer Grid.Row="3" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
-                                <TextBlock TextWrapping="Wrap" Text="scretch in display"/>
+                                <TextBlock Name="ajFaultDetailsTB" TextWrapping="Wrap" Text="scretch in display"/>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Margin="2" Text="Other Details :" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <ScrollViewer Grid.Row="4" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
-                                <TextBlock TextWrapping="Wrap" Text="coustomer gave us new display"/>
+                                <TextBlock Name="ajOtherDetailsTB" TextWrapping="Wrap" Text="coustomer gave us new display"/>
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Margin="2" Text="Accessories Taken :" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <ScrollViewer Grid.Row="5" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
-                                <TextBlock TextWrapping="Wrap" Text="Phone, Memory Chip, Battary, SIM, Charger, New Part" />
+                                <TextBlock Name="ajAccessoriesTB" TextWrapping="Wrap" Text="Phone, Memory Chip, Battary, SIM, Charger, New Part" />
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="6" Grid.Column="0" Margin="2" Text="Developer Note :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <ScrollViewer Grid.Row="6" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
-                                <TextBox TextWrapping="Wrap" />
-                            </ScrollViewer>
+                            <!--<ScrollViewer Grid.Row="6" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">-->
+                            <TextBox Name="ajDeveloperNoteTB" Grid.Row="6" Grid.Column="1" Margin="2"  TextWrapping="Wrap" />
+                            <!--</ScrollViewer>-->
 
                             <TextBlock Grid.Row="7" Grid.Column="0" Margin="2" Text="Parts Added :" HorizontalAlignment="Right" VerticalAlignment="Top" />
                             <ScrollViewer Grid.Row="7" Grid.Column="1" Margin="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
@@ -95,7 +98,7 @@
                                         <RowDefinition Height="30"/>
                                     </Grid.RowDefinitions>
 
-                                    <Button Grid.Row="0" Grid.Column="0" Content="Add Part" Margin="2" MinWidth="50" MaxWidth="100" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <Button Name="ajAddPartBtn" Grid.Row="0" Grid.Column="0" Content="Add Part" Margin="2" MinWidth="50" MaxWidth="100" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                                     <TextBox Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Controls:TextboxHelper.Watermark="Discription" Margin="2" VerticalAlignment="Center"/>
                                     <TextBox Grid.Row="1" Grid.Column="1" Controls:TextboxHelper.Watermark="Rs. 0.00" VerticalAlignment="Center"/>
@@ -109,7 +112,7 @@
                             </ScrollViewer>
 
                             <TextBlock Grid.Row="8" Grid.Column="0" Margin="2" Text="Repare Cost :" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Grid.Row="8" Grid.Column="1" Margin="2" Controls:TextboxHelper.Watermark="Rs. 0.00"/>
+                            <TextBox Name="ajRepareCostTB" Grid.Row="8" Grid.Column="1" Margin="2" Controls:TextboxHelper.Watermark="Rs. 0.00"/>
                         </Grid>
 
                         <Grid Margin="2" Grid.Row="1">
@@ -119,16 +122,14 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Content="Cancel" Margin="5" />
-                                <Button Grid.Column="2" Content="Done" Margin="5" />
+                                <Button Name="ajCancelBtn" Grid.Column="1" Content="Cancel" Margin="5" />
+                                <Button Name="ajDoneBtn" Grid.Column="2" Content="Done" Margin="5" />
                             </Grid>
                         </Grid>
                     </Grid>
-                </Border>
-
-
+                <!--</Border>-->
             </Grid>
-
         </Border>
-    </ScrollViewer>
+    </DockPanel>
+    <!--</ScrollViewer>-->
 </UserControl>

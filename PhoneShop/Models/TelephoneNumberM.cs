@@ -5,11 +5,11 @@ using System.Text;
 
 namespace PhoneShop.Models
 {
-    public class CustomerVM
+    public class TelephoneNumberM
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string NIC { get; set; }
+        public int CustomerId { get; set; }
+        public string TelNo { get; set; }
+        public bool IsHome { get; set; }
     }
 }

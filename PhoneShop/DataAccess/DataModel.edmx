@@ -10,6 +10,7 @@
           <EntitySet Name="Device" EntityType="PhoneShopdbModel.Store.Device" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Job" EntityType="PhoneShopdbModel.Store.Job" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="NewItem" EntityType="PhoneShopdbModel.Store.NewItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PhoneBrand" EntityType="PhoneShopdbModel.Store.PhoneBrand" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PhoneModel" EntityType="PhoneShopdbModel.Store.PhoneModel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Repare" EntityType="PhoneShopdbModel.Store.Repare" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SystemUser" EntityType="PhoneShopdbModel.Store.SystemUser" store:Type="Tables" Schema="dbo" />
@@ -21,6 +22,14 @@
           <AssociationSet Name="fk_customerId" Association="PhoneShopdbModel.Store.fk_customerId">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="TelephoneNumber" EntitySet="TelephoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_phoneModel_id" Association="PhoneShopdbModel.Store.FK_phoneModel_id">
+            <End Role="PhoneModel" EntitySet="PhoneModel" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneModel_PhoneBrand" Association="PhoneShopdbModel.Store.FK_PhoneModel_PhoneBrand">
+            <End Role="PhoneBrand" EntitySet="PhoneBrand" />
+            <End Role="PhoneModel" EntitySet="PhoneModel" />
           </AssociationSet>
           <AssociationSet Name="job_fk_customerId" Association="PhoneShopdbModel.Store.job_fk_customerId">
             <End Role="Customers" EntitySet="Customers" />
@@ -44,9 +53,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="ntext" />
-          <Property Name="NIC" Type="nchar" MaxLength="10" />
-          <Property Name="Email" Type="ntext" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NIC" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -55,20 +64,21 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Job_Id" Type="int" />
           <Property Name="IsPhone" Type="bit" />
-          <Property Name="EmiNumber" Type="ntext" />
-          <Property Name="Discription" Type="ntext" />
+          <Property Name="EmiNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="JobNo" Type="ntext" />
-          <Property Name="JobDiscription" Type="ntext" />
-          <Property Name="OtherDiscription" Type="ntext" />
+          <Property Name="JobNo" Type="nvarchar(max)" />
+          <Property Name="JobDiscription" Type="nvarchar(max)" />
+          <Property Name="OtherDiscription" Type="nvarchar(max)" />
           <Property Name="IsCompleted" Type="bit" />
           <Property Name="IsDevice" Type="bit" />
           <Property Name="Customer_Id" Type="int" />
+          <Property Name="PhoneModel_Id" Type="int" />
         </EntityType>
         <EntityType Name="NewItem">
           <Key>
@@ -76,18 +86,25 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Job_Id" Type="int" />
-          <Property Name="Name" Type="nchar" MaxLength="10" />
-          <Property Name="Discription" Type="ntext" />
-          <Property Name="Cost" Type="money" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Cost" Type="float" />
+        </EntityType>
+        <EntityType Name="PhoneBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandName" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="PhoneModel">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="BrandName" Type="ntext" />
-          <Property Name="ModelNo" Type="ntext" />
-          <Property Name="ImageURI" Type="ntext" />
+          <Property Name="Brand_Id" Type="int" />
+          <Property Name="ModelNumber" Type="nvarchar(max)" />
+          <Property Name="ImageURI" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Repare">
           <Key>
@@ -96,16 +113,16 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Developer_Id" Type="int" />
           <Property Name="Job_Id" Type="int" />
-          <Property Name="Discription" Type="ntext" />
-          <Property Name="Cost" Type="money" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Cost" Type="float" />
         </EntityType>
         <EntityType Name="SystemUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="ntext" />
-          <Property Name="Status" Type="ntext" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar(max)" />
           <Property Name="UserName" Type="nchar" MaxLength="100" />
           <Property Name="Password" Type="nchar" MaxLength="100" />
         </EntityType>
@@ -116,6 +133,7 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Customer_Id" Type="int" />
           <Property Name="TelNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsHome" Type="bit" />
         </EntityType>
         <Association Name="device_fk_jobId">
           <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="0..1" />
@@ -138,6 +156,30 @@
             </Principal>
             <Dependent Role="TelephoneNumber">
               <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_phoneModel_id">
+          <End Role="PhoneModel" Type="PhoneShopdbModel.Store.PhoneModel" Multiplicity="0..1" />
+          <End Role="Job" Type="PhoneShopdbModel.Store.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="PhoneModel_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneModel_PhoneBrand">
+          <End Role="PhoneBrand" Type="PhoneShopdbModel.Store.PhoneBrand" Multiplicity="0..1" />
+          <End Role="PhoneModel" Type="PhoneShopdbModel.Store.PhoneModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneBrand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhoneModel">
+              <PropertyRef Name="Brand_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -198,6 +240,7 @@
           <EntitySet Name="Devices" EntityType="PhoneShopdbModel.Device" />
           <EntitySet Name="Jobs" EntityType="PhoneShopdbModel.Job" />
           <EntitySet Name="NewItems" EntityType="PhoneShopdbModel.NewItem" />
+          <EntitySet Name="PhoneBrands" EntityType="PhoneShopdbModel.PhoneBrand" />
           <EntitySet Name="PhoneModels" EntityType="PhoneShopdbModel.PhoneModel" />
           <EntitySet Name="Repares" EntityType="PhoneShopdbModel.Repare" />
           <EntitySet Name="SystemUsers" EntityType="PhoneShopdbModel.SystemUser" />
@@ -214,6 +257,10 @@
             <End Role="Job" EntitySet="Jobs" />
             <End Role="Device" EntitySet="Devices" />
           </AssociationSet>
+          <AssociationSet Name="FK_phoneModel_id" Association="PhoneShopdbModel.FK_phoneModel_id">
+            <End Role="PhoneModel" EntitySet="PhoneModels" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
           <AssociationSet Name="newItem_fk_jobId" Association="PhoneShopdbModel.newItem_fk_jobId">
             <End Role="Job" EntitySet="Jobs" />
             <End Role="NewItem" EntitySet="NewItems" />
@@ -221,6 +268,10 @@
           <AssociationSet Name="repare_fk_jobId" Association="PhoneShopdbModel.repare_fk_jobId">
             <End Role="Job" EntitySet="Jobs" />
             <End Role="Repare" EntitySet="Repares" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneModel_PhoneBrand" Association="PhoneShopdbModel.FK_PhoneModel_PhoneBrand">
+            <End Role="PhoneBrand" EntitySet="PhoneBrands" />
+            <End Role="PhoneModel" EntitySet="PhoneModels" />
           </AssociationSet>
           <AssociationSet Name="repare_fk_developerId" Association="PhoneShopdbModel.repare_fk_developerId">
             <End Role="SystemUser" EntitySet="SystemUsers" />
@@ -232,9 +283,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NIC" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Email" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NIC" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TelephoneNumbers" Relationship="PhoneShopdbModel.fk_customerId" FromRole="Customer" ToRole="TelephoneNumber" />
           <NavigationProperty Name="Jobs" Relationship="PhoneShopdbModel.job_fk_customerId" FromRole="Customer" ToRole="Job" />
         </EntityType>
@@ -245,7 +296,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="Job_Id" />
           <Property Type="Boolean" Name="IsPhone" />
-          <Property Type="String" Name="EmiNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmiNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.device_fk_jobId" FromRole="Device" ToRole="Job" />
         </EntityType>
@@ -260,8 +311,10 @@
           <Property Type="Boolean" Name="IsCompleted" />
           <Property Type="Boolean" Name="IsDevice" />
           <Property Type="Int32" Name="Customer_Id" />
+          <Property Type="Int32" Name="PhoneModel_Id" />
           <NavigationProperty Name="Customer" Relationship="PhoneShopdbModel.job_fk_customerId" FromRole="Job" ToRole="Customer" />
           <NavigationProperty Name="Devices" Relationship="PhoneShopdbModel.device_fk_jobId" FromRole="Job" ToRole="Device" />
+          <NavigationProperty Name="PhoneModel" Relationship="PhoneShopdbModel.FK_phoneModel_id" FromRole="Job" ToRole="PhoneModel" />
           <NavigationProperty Name="NewItems" Relationship="PhoneShopdbModel.newItem_fk_jobId" FromRole="Job" ToRole="NewItem" />
           <NavigationProperty Name="Repares" Relationship="PhoneShopdbModel.repare_fk_jobId" FromRole="Job" ToRole="Repare" />
         </EntityType>
@@ -271,19 +324,29 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="Job_Id" />
-          <Property Type="String" Name="Name" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <Property Type="Double" Name="Cost" />
           <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.newItem_fk_jobId" FromRole="NewItem" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="PhoneBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BrandName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhoneModels" Relationship="PhoneShopdbModel.FK_PhoneModel_PhoneBrand" FromRole="PhoneBrand" ToRole="PhoneModel" />
         </EntityType>
         <EntityType Name="PhoneModel">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="BrandName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ModelNo" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Brand_Id" />
+          <Property Type="String" Name="ModelNumber" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ImageURI" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Jobs" Relationship="PhoneShopdbModel.FK_phoneModel_id" FromRole="PhoneModel" ToRole="Job" />
+          <NavigationProperty Name="PhoneBrand" Relationship="PhoneShopdbModel.FK_PhoneModel_PhoneBrand" FromRole="PhoneModel" ToRole="PhoneBrand" />
         </EntityType>
         <EntityType Name="Repare">
           <Key>
@@ -293,7 +356,7 @@
           <Property Type="Int32" Name="Developer_Id" />
           <Property Type="Int32" Name="Job_Id" />
           <Property Type="String" Name="Discription" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <Property Type="Double" Name="Cost" />
           <NavigationProperty Name="Job" Relationship="PhoneShopdbModel.repare_fk_jobId" FromRole="Repare" ToRole="Job" />
           <NavigationProperty Name="SystemUser" Relationship="PhoneShopdbModel.repare_fk_developerId" FromRole="Repare" ToRole="SystemUser" />
         </EntityType>
@@ -315,6 +378,7 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="Customer_Id" />
           <Property Type="String" Name="TelNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsHome" />
           <NavigationProperty Name="Customer" Relationship="PhoneShopdbModel.fk_customerId" FromRole="TelephoneNumber" ToRole="Customer" />
         </EntityType>
         <Association Name="fk_customerId">
@@ -353,6 +417,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_phoneModel_id">
+          <End Type="PhoneShopdbModel.PhoneModel" Role="PhoneModel" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="PhoneModel_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="newItem_fk_jobId">
           <End Type="PhoneShopdbModel.Job" Role="Job" Multiplicity="0..1" />
           <End Type="PhoneShopdbModel.NewItem" Role="NewItem" Multiplicity="*" />
@@ -374,6 +450,18 @@
             </Principal>
             <Dependent Role="Repare">
               <PropertyRef Name="Job_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneModel_PhoneBrand">
+          <End Type="PhoneShopdbModel.PhoneBrand" Role="PhoneBrand" Multiplicity="0..1" />
+          <End Type="PhoneShopdbModel.PhoneModel" Role="PhoneModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneBrand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhoneModel">
+              <PropertyRef Name="Brand_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -419,6 +507,7 @@
           <EntitySetMapping Name="Jobs">
             <EntityTypeMapping TypeName="PhoneShopdbModel.Job">
               <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="PhoneModel_Id" ColumnName="PhoneModel_Id" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="IsDevice" ColumnName="IsDevice" />
                 <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
@@ -440,12 +529,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PhoneBrands">
+            <EntityTypeMapping TypeName="PhoneShopdbModel.PhoneBrand">
+              <MappingFragment StoreEntitySet="PhoneBrand">
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PhoneModels">
             <EntityTypeMapping TypeName="PhoneShopdbModel.PhoneModel">
               <MappingFragment StoreEntitySet="PhoneModel">
                 <ScalarProperty Name="ImageURI" ColumnName="ImageURI" />
-                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
-                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ModelNumber" ColumnName="ModelNumber" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -475,6 +572,7 @@
           <EntitySetMapping Name="TelephoneNumbers">
             <EntityTypeMapping TypeName="PhoneShopdbModel.TelephoneNumber">
               <MappingFragment StoreEntitySet="TelephoneNumber">
+                <ScalarProperty Name="IsHome" ColumnName="IsHome" />
                 <ScalarProperty Name="TelNo" ColumnName="TelNo" />
                 <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

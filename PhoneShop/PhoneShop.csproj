@@ -58,8 +58,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -69,7 +69,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -114,6 +113,9 @@
     <Compile Include="DataAccess\NewItem.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\PhoneBrand.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\PhoneModel.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -126,18 +128,31 @@
     <Compile Include="DataAccess\TelephoneNumber.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerVM.cs" />
+    <Compile Include="Models\CustomerM.cs" />
+    <Compile Include="Models\DetailedJobModelM.cs" />
+    <Compile Include="Models\JobM.cs" />
+    <Compile Include="Models\NewPartM.cs" />
+    <Compile Include="Models\DeviceM.cs" />
+    <Compile Include="Models\DetailedPhoneModelM.cs" />
+    <Compile Include="Models\PhoneModelM.cs" />
+    <Compile Include="Models\ProgramDataModel.cs" />
+    <Compile Include="Models\RepareM.cs" />
+    <Compile Include="Models\SystemUserM.cs" />
+    <Compile Include="Models\TelephoneNumberM.cs" />
     <Compile Include="PhoneRepareDetailsUserControl.xaml.cs">
       <DependentUpon>PhoneRepareDetailsUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PhoneShopdbDataSet.Designer.cs">
+    <Compile Include="PhoneShopdbDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneShopdbDataSet.xsd</DependentUpon>
+      <DependentUpon>PhoneShopdbDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ReleaseJobUserControl.xaml.cs">
       <DependentUpon>ReleaseJobUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddNewJobVM.cs" />
+    <Compile Include="ViewModels\MainDataContractorVM.cs" />
+    <Compile Include="ViewModels\ReleaseJobVM.cs" />
     <Page Include="AddNewJobUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,16 +227,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="PhoneShopdbDataSet.xsc">
-      <DependentUpon>PhoneShopdbDataSet.xsd</DependentUpon>
+    <None Include="PhoneShopdbDataSet1.xsc">
+      <DependentUpon>PhoneShopdbDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="PhoneShopdbDataSet.xsd">
+    <None Include="PhoneShopdbDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PhoneShopdbDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhoneShopdbDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="PhoneShopdbDataSet.xss">
-      <DependentUpon>PhoneShopdbDataSet.xsd</DependentUpon>
+    <None Include="PhoneShopdbDataSet1.xss">
+      <DependentUpon>PhoneShopdbDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -276,15 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="PhoneShopdb.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PhoneShopdb_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>PhoneShopdb.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
