@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:VM="clr-namespace:PhoneShop.ViewModels"
-             mc:Ignorable="d" Loaded="WindowLoaded"
-             MinHeight="500" MinWidth="400">
+             mc:Ignorable="d" MinHeight="500" MinWidth="400">
     <UserControl.DataContext>
         <VM:ReleaseJobVM x:Name="releseJobVM"/>
     </UserControl.DataContext>

@@ -23,6 +23,7 @@ namespace PhoneShop
         public MainWindow()
         {
             InitializeComponent();
+            ReleaseJobUC.ThreadDataLoad();
         }
     }
 }

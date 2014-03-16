@@ -262,7 +262,7 @@ namespace PhoneShop
             phoneBrandNamesCB.Text = "";
             phoneImgBox.Source = new BitmapImage(new Uri("/Content/Images/No-Image.jpg", UriKind.Relative));
             phoneModelsCB.Text = "";
-            phoneModelsCB.Items.Clear();
+            //phoneModelsCB.Items.Clear();
             jobNoteTxtBox.SelectAll(); jobNoteTxtBox.Selection.Text = "";
             emiNoTxtBox.Text = "";
             isPhoneChkBox.IsChecked = false;

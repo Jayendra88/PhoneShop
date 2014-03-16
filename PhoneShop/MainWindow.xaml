@@ -160,7 +160,7 @@
                     <TabItem Header="Release Job"
                              Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, 
                              ElementName=releaseJobMI, Mode=TwoWay}">
-                        <views:ReleaseJobUserControl></views:ReleaseJobUserControl>
+                        <views:ReleaseJobUserControl x:Name="ReleaseJobUC"></views:ReleaseJobUserControl>
                     </TabItem>
 
                     <TabItem Header="Developer Options"

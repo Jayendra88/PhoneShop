@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace PhoneShop.Models
 {
@@ -16,7 +17,9 @@ namespace PhoneShop.Models
 
         CRUDManager crudManager = new CRUDManager();
 
-        private ProgramDataModel() { }
+        private ProgramDataModel() 
+        {
+        }
 
         /// <summary>
         /// Singalton Instance
@@ -163,11 +166,6 @@ namespace PhoneShop.Models
 
         #endregion
 
-
-
-
-
-
         public bool AddNewJob(DetailedJobModelM job)
         {
             crudManager.getTelephoneNumberByCustomerId(4);
@@ -178,15 +176,14 @@ namespace PhoneShop.Models
             return false;
         }
 
-        public DetailedJobModelM LoadDetailedJob(int jobId)
+        public async Task<DetailedJobModelM> LoadDetailedJob()//int jobId
         {
             DetailedJobModelM job = new DetailedJobModelM();
             job.Job = new JobM() { JobNumber = "PS - 0001" };
             job.Customer = new CustomerM() { Name = "Jayendra" };
 
-            //jobs.Add(job);
-
             return job;
         }
+
     }
 }
